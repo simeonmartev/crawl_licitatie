@@ -1,8 +1,7 @@
-from pprint import pprint
 import scrapy
 import json
 
-from ..items import CrawlLicitatieItem
+from ..items import CrawlLicitatieNotice
 
 
 class APISpider(scrapy.Spider):
@@ -13,12 +12,11 @@ class APISpider(scrapy.Spider):
         headers = {
             "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:98.0) Gecko/20100101 Firefox/98.0",
             "Accept": "application/json, text/plain, */*",
-            "Accept-Language": " uk-UA,uk;q=0.8,en-US;q=0.5,en;q=0.3",
+            "Accept-Language": "en-GB,en",
             "Accept-Encoding": "gzip, deflate",
             "Culture": "en-US",
             "Authorization": "Bearer null",
             "RefreshToken": "null",
-            "HttpSessionID": "D49CB35C-0AA5-4E04-8C83-5FED8946BF4E",
             "Content-Type": "application/json;charset=utf-8",
             "Origin": "http://www.e-licitatie.ro",
             "Connection": "keep-alive",
@@ -45,9 +43,10 @@ class APISpider(scrapy.Spider):
         )
 
     def parse(self, response):
-        noticeses = json.loads(response.body)
-        for notice in noticeses["items"]:
-            item = CrawlLicitatieItem(
+        notices = json.loads(response.body)
+        for notice in notices["items"]:
+            item = CrawlLicitatieNotice(
+                notice_id=notice["noticeId"],
                 notice_number=notice["noticeNo"],
                 tender_name=notice["contractTitle"],
                 procedure_status=notice["sysNoticeState"]["text"],
@@ -55,7 +54,9 @@ class APISpider(scrapy.Spider):
                 type_of_procurement=notice["sysAcquisitionContractType"][
                     "text"
                 ],
-                estimated_value=notice["estimatedValueExport"],
-                date=notice["noticeStateDate"],
+                estimated_value=notice["estimatedValueExport"].replace(
+                    " RON", ""
+                ),
+                datetime=notice["noticeStateDate"],
             )
             yield item
