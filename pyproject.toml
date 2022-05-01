@@ -8,6 +8,7 @@ authors = ["Simeon Martev <simeon.martev@adata.pro>"]
 python = "^3.10"
 Scrapy = "^2.6.1"
 scrapy-jsonschema = "^0.5.0"
+peewee = "^3.14.10"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
