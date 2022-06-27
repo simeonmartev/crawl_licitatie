@@ -22,3 +22,10 @@ scrapy list
 ```bash
 scrapy crawl api_spider
 ```
+
+# References
+- [HTTP reference @ MDM](https://developer.mozilla.org/en-US/docs/Web/HTTP)
+- [HTML reference @ MDM](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- [Xpath reference @ MDM](https://developer.mozilla.org/en-US/docs/Web/XPath)
+- [XPath Tutorial](https://www.w3schools.com/xml/xpath_intro.asp)
+- [Scrapy Docs](https://docs.scrapy.org/en/latest/index.html)
