@@ -1,3 +1,4 @@
+from pprint import pprint
 import scrapy
 import json
 
@@ -7,9 +8,9 @@ from ..items import CrawlLicitatieNotice
 class APISpider(scrapy.Spider):
     name = "api_spider"
 
-    def start_requests(self):
+    def start_requests(self) -> scrapy.Request:
         url = "http://www.e-licitatie.ro/api-pub/NoticeCommon/GetCNoticeList/"
-        headers = {
+        HEADERS = {
             "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:98.0) Gecko/20100101 Firefox/98.0",
             "Accept": "application/json, text/plain, */*",
             "Accept-Language": "en-GB,en",
@@ -22,7 +23,7 @@ class APISpider(scrapy.Spider):
             "Connection": "keep-alive",
             "Referer": "http://www.e-licitatie.ro/pub/notices/contract-notices/list/2/1",
         }
-        body = {
+        BODY = {
             "sysNoticeTypeIds": [2],
             "sortProperties": [],
             "pageSize": 5,
@@ -37,12 +38,12 @@ class APISpider(scrapy.Spider):
             url=url,
             callback=self.parse,
             method="POST",
-            headers=headers,
-            body=json.dumps(body),
+            headers=HEADERS,
+            body=json.dumps(BODY),
             encoding="utf-8",
         )
 
-    def parse(self, response):
+    def parse(self, response) -> CrawlLicitatieNotice:
         notices = json.loads(response.body)
         for notice in notices["items"]:
             item = CrawlLicitatieNotice(
@@ -54,9 +55,12 @@ class APISpider(scrapy.Spider):
                 type_of_procurement=notice["sysAcquisitionContractType"][
                     "text"
                 ],
-                estimated_value=notice["estimatedValueExport"].replace(
-                    " RON", ""
+                estimated_value=float(
+                    notice["estimatedValueExport"]
+                    .replace(" RON", "")
+                    .replace(",", ".")
                 ),
                 datetime=notice["noticeStateDate"],
             )
+            # pprint(item)
             yield item
