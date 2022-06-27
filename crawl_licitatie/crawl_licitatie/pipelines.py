@@ -1,13 +1,10 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-
-
-# useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
+from dateutil import parser
+from ...model.notices import NoticeModel
 
 
 class CrawlLicitatiePipeline:
-    def process_item(self, item, spider):
-        return item
+    def process_item(self, item, spider) -> NoticeModel:
+        notice = item
+        notice["datetime"] = parser.parser(item["datetime"])
+        notice = NoticeModel.create(**notice)
+        return notice
