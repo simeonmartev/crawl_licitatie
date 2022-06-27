@@ -8,7 +8,7 @@ class CrawlLicitatieNotice(JsonSchemaItem):
         "description": "A licitatie crawl notice",
         "type": "object",
         "properties": {
-            "notice_id": {"type": "string"},
+            "notice_id": {"type": "integer"},
             "notice_number": {"type": "string"},
             "tender_name": {"type": "string"},
             "procedure_status": {"type": "string"},
