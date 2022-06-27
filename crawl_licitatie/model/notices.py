@@ -27,3 +27,9 @@ class NoticeModel(BaseModel):
     estimated_value = FloatField()
     created_at = DateTimeField(default=datetime.now())
     datetime = DateTimeField(default=datetime.now())
+
+
+def initialize_db():
+    db.connect()
+    db.create_tables([NoticeModel], safe=True)
+    db.close()

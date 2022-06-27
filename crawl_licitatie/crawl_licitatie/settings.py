@@ -63,6 +63,7 @@ DEFAULT_REQUEST_HEADERS = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     "scrapy_jsonschema.JsonSchemaValidatePipeline": 100,
+    "crawl_licitatie.pipelines.CrawlLicitatiePipeline": 200,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

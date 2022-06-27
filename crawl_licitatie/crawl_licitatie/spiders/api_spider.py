@@ -1,6 +1,8 @@
-from pprint import pprint
-import scrapy
+from datetime import datetime
 import json
+
+import scrapy
+from pprint import pprint
 
 from ..items import CrawlLicitatieNotice
 
@@ -60,7 +62,9 @@ class APISpider(scrapy.Spider):
                     .replace(" RON", "")
                     .replace(",", ".")
                 ),
-                datetime=notice["noticeStateDate"],
+                datetime=datetime.strptime(
+                    notice["noticeStateDate"], "%Y-%m-%dT%H:%M:%S%z"
+                ),
             )
-            # pprint(item)
-            yield item
+            pprint(item)
+            # yield item
