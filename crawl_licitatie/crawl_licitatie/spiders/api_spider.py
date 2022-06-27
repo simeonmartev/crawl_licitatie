@@ -11,6 +11,7 @@ class APISpider(scrapy.Spider):
     name = "api_spider"
 
     def start_requests(self) -> scrapy.Request:
+        # API URL
         url = "http://www.e-licitatie.ro/api-pub/NoticeCommon/GetCNoticeList/"
         HEADERS = {
             "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:98.0) Gecko/20100101 Firefox/98.0",
@@ -36,18 +37,27 @@ class APISpider(scrapy.Spider):
             "pageIndex": 0,
         }
 
+        # yielding http request
         yield scrapy.Request(
             url=url,
-            callback=self.parse,
+            callback=self.parse,  # callback method
             method="POST",
             headers=HEADERS,
             body=json.dumps(BODY),
             encoding="utf-8",
         )
 
+    # callback method,
+    # getting http response
     def parse(self, response) -> CrawlLicitatieNotice:
+
+        # response body is JSON
         notices = json.loads(response.body)
+
+        # parsing each element in the json response
         for notice in notices["items"]:
+
+            # each item is instance from class CrawlLicitatieNotice see items.py
             item = CrawlLicitatieNotice(
                 notice_id=notice["noticeId"],
                 notice_number=notice["noticeNo"],
