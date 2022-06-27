@@ -7,7 +7,7 @@ requirements:
 - [poetry](https://python-poetry.org)
 ```bash
 git clone git@github.com:simeonmartev/crawl_licitatie.git
-
+cd crawl_licitatie
 poetry install
 ```
 
@@ -15,11 +15,14 @@ poetry install
 
 ## list spiders
 ```bash
+cd crawl_licitatie
 scrapy list
 ```
 
 ## crawl
 ```bash
+poetry shell
+cd crawl_licitatie
 scrapy crawl api_spider
 ```
 
