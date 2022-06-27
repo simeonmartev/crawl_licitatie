@@ -66,5 +66,6 @@ class APISpider(scrapy.Spider):
                     notice["noticeStateDate"], "%Y-%m-%dT%H:%M:%S%z"
                 ),
             )
-            pprint(item)
-            # yield item
+            # __import__('ipdb').set_trace()
+            # pprint(item)
+            yield item

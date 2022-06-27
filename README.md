@@ -23,7 +23,7 @@ scrapy list
 scrapy crawl api_spider
 ```
 
-# References
+# Useful links
 - [HTTP reference @ MDM](https://developer.mozilla.org/en-US/docs/Web/HTTP)
 - [HTML reference @ MDM](https://developer.mozilla.org/en-US/docs/Web/HTML)
 - [Xpath reference @ MDM](https://developer.mozilla.org/en-US/docs/Web/XPath)
@@ -31,3 +31,8 @@ scrapy crawl api_spider
 - [Scrapy Docs](https://docs.scrapy.org/en/latest/index.html)
 - [Chrome DevTools](https://developer.chrome.com/docs/devtools/overview/)
 - [Firefox DevTools](https://firefox-dev.tools)
+- [SQLite: SQL database engine](https://www.sqlite.org/index.html)
+- [Peewee is a simple and small ORM](http://docs.peewee-orm.com/en/latest/)
+- [ipdb](https://github.com/gotcha/ipdb) [IPython](http://ipython.org) debugger
+- [Visual Studio Code](https://code.visualstudio.com)  a source-code editor
+- [Data Collection From Open Web presentation](https://docs.google.com/presentation/d/1MqJKjupMIxKKVkwXwSOpx1iEgq3ACH7k39SclkjDWik/edit?usp=sharing)
